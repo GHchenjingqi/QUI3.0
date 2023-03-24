@@ -7,23 +7,27 @@
 let QUI = {
     title: "QUI插件",
     name: "QUI",
-    des: "QUI是一款开源的WEB端ui框架，项目使用开源插件框架：JQuery,Wordpress,swiper等。",
+    des: "QUI.js是一款开源的前端轻量UI插件，能与JQuery,Swiper,Vue,Bootstraps,小程序,Wordpress等框架轻松耦合，尽量减少前端造轮子。QUI集成了ES6，HTML5，AJAX等JS常用API方法",
     version: "1.0",
     data: {
         titleInPage: "欢迎回来，EMO~", //进入页面提示语
         titleOutPage: "不要走嘛，再看看！", //进入页面提示语
         resourcePath:"https://cdn.jsdelivr.net/gh/GHchenjingqi/resources/"
     },
+    // 功能数据
     dataBase: {
+        // 主题背景
         themes: [  {
             id: "t3",
             name: "机车靓妹",
             files: "images/bz03.jpg",
         }],
+        // 音频路径
         voices: [],
     },
+    // 是否开启调试模式
     debugs: ["debug", "log", "warn", "info"],
-    //设备分辨率
+    // 设备分辨率
     screen: {
         width: 0,
         height: 0
@@ -872,3 +876,5 @@ QUI.setAudios = async function () {
     }
 }
 
+
+export default QUI
