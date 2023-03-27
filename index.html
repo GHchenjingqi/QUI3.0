@@ -5,20 +5,99 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="./css/ui.3.0.css">
+	<link rel="stylesheet" href="./css/ui.3.2.css">
 	<title>Document</title>
+	<style>
+		.content{width: 1400px;margin-left: auto;margin-right: auto;}
+		.box{margin-bottom: 50px;}.box h1{margin-bottom: 20px;}
+	</style>
 </head>
 <body>
-	
+	<div class="content">
+		<div class="box">
+			<h1>Text 文本</h1>
+			<row>
+				<h1>H1:月落乌啼霜满天</h1>
+				<h2>H2:月落乌啼霜满天</h2>
+				<h3>H3:月落乌啼霜满天</h3>
+				<h4>H4:月落乌啼霜满天</h4>
+				<h5>H4:月落乌啼霜满天</h5>
+				<h6>H5:月落乌啼霜满天</h6>
+			</row>
+			<row>
+				<p>段落：<a href="http://www.baidu.com">百度</a>全新一代知识增强大语言模型，文心大模型家族的新成员，能够与人对话互动，回答问题，协助创作，高效便捷地帮助人们获取信息、知识和灵感。</p>
+				<p>段落当需要展示标题、段落、列表内容时使用，如文章/博客/日志的文本样式。</p>
+			</row>
+			<row>
+				<ul>
+					<p>ul > li</p>
+					<li>危险：删除/移动/修改权限等危险操作，一般需要二次确认。</li>
+					<li>幽灵：用于背景色比较复杂的地方，常用在首页/产品页等展示场景。</li>
+					<li>禁用：行动点不可用的时候，一般需要文案解释。</li>
+					<li>加载中：用于异步操作等待反馈的时候，也可以避免多次提交。</li>
+				</ul>
+				<ol>
+					<p>ol > li</p>
+					<li>危险：删除/移动/修改权限等危险操作，一般需要二次确认。</li>
+					<li>幽灵：用于背景色比较复杂的地方，常用在首页/产品页等展示场景。</li>
+					<li>禁用：行动点不可用的时候，一般需要文案解释。</li>
+					<li>加载中：用于异步操作等待反馈的时候，也可以避免多次提交。</li>
+				</ol>
+			</row>
+		</div>
+		<div class="box">
+			<h1>Button 按钮</h1>
+			<row>
+				<button class="white">白色按钮</button>	
+				<button>默认按钮</button>
+				<button class="black">黑色按钮</button>
+				<button class="yellow">警告按钮</button>
+				<button class="green">成功按钮</button>	
+				<button class="red">危险按钮</button>
+				<button disabled>禁用按钮</button>
+			</row>
+			<row>
+				<button class="white">白色按钮</button>	
+				<button type="border">描边按钮</button>
+				<button class="black" type="border">黑色按钮</button>
+				<button class="yellow" type="border">警告按钮</button>
+				<button class="green" type="border">成功按钮</button>	
+				<button class="red" type="border">危险按钮</button>
+				<button type="border" class="white" disabled>禁用按钮</button>
+
+			</row>
+			<row>
+				<button class="white" circle>圆角白色</button>
+				<button circle>圆角默认色</button>
+				<button class="black" circle>黑色按钮</button>
+				<button class="yellow" circle>警告按钮</button>
+				<button class="green" circle>成功按钮</button>	
+				<button class="red" circle>危险按钮</button>
+				<button class="white" circle disabled>禁用按钮</button>
+			</row>
+			<row>
+				<button class="white"  circle>圆角白色</button>
+				<button type="border" circle>圆角默认色</button>
+				<button class="black" type="border" circle>黑色按钮</button>
+				<button class="yellow" type="border" circle>警告按钮</button>
+				<button class="green" type="border" circle>成功按钮</button>	
+				<button class="red" type="border" circle>危险按钮</button>
+				<button type="border" circle disabled>禁用按钮</button>
+			</row>
+		</div>
+
+	</div>
+
 
 
 	<script type="module">
 		import Q from "./QUI/main.js"
 		// 运行Q入口函数
-		await Q.startRun(0,0,"init")
-
-
-
+		let options = {
+			callback:"init",
+			debug:true
+		}
+		await Q.startRun(options)
 	</script>
 </body>
 </html>

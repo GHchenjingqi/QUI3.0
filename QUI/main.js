@@ -39,40 +39,63 @@ class QUI {
 			this.log("~~~Body页面宽高:" + document.body.clientWidth + "*" + document.body.clientHeight)
 		}
 	}
-	__listen(timeFlag, devFlag, callback) {
+	__listen(callback,debug) {
 		let that = this
 		window.addEventListener("resize", function () {
-			that.throttle(that.__reset(timeFlag, devFlag, callback), 1000)
+			that.__reset(callback,debug)
 		})
 	}
-	__reset(timeFlag, devFlag, callback) {
+	async __reset( callback,debug) {
 		console.clear()
-		this.startRun(timeFlag, devFlag, callback)
+		this.__setRem()
+		if (callback) {
+			await this[callback](debug)
+		}
+	}
+	__setRem(){
+		//重置rem单位
+		let w = document.body.clientWidth
+		let rem = window.innerWidth / 12 
+		if(w < 768){
+			rem = window.innerWidth / 4 
+		}else if(w > 768 && w < 1290){
+			rem = window.innerWidth / 7 
+		}else if(w > 1280 && w < 1450){
+			rem = window.innerWidth / 8 
+		}
+		else if(w > 1450 && w < 1900){
+			rem = window.innerWidth / 10 
+		}
+		document.documentElement.style.fontSize = rem + 'px'
+		
 	}
 	//start前执行
-	beforeRun() { }
+	async beforeRun() { }
 	//start后执行
-	endRun() { }
+	async endRun() { }
 	//开始
-	async startRun(timeFlag, devFlag, callback, debug = false) {
-		this.log("Enter QUI Start Fun:")
+	async startRun(options) {
+		let { callback, debug = false, timeFlag, devFlag } = {...options}
 		//开始函数执行前执行beforeRun
-		this.beforeRun()
+		this.__setRem()
+		// 冻结数据
+		await this.beforeRun()
+		//执行回调
+		if (callback) {
+			await this[callback](debug)
+		}
+		this.log("Enter QUI Start Fun:")
 		this.__info()
 		if (timeFlag) {
 			this.__time()
 		}
 		this.__device(devFlag)
-		this.__listen(timeFlag, devFlag, callback)
-		//执行回调
-		if (callback) {
-			await this[callback](debug)
-		}
+		this.__listen(callback,debug)
 		//开始函数执行完成后执行endRun
-		this.endRun()
+		await this.endRun()
 		this.log("Leave QUI Start Fun.")
 	}
 }
 var Q = Object.assign(new QUI(), comFun)
-
+await Q.ObjectFreeze(Q,["title","name","des","version"])
 export default Q

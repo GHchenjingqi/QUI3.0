@@ -54,12 +54,8 @@ QUI.init = async function (debugShow = true) {
     this.dataBase.url = this.getUrl()
     //音效扩展
     await this.setAudios()
-    //设备宽度
-    let that = this
-    window.addEventListener("resize", function () {
-        that.throttle(that.getPageSize(), 1000)
-    })
-    this.log(this)
+    // 测试打印
+    this.error(this)
 }
 
 /**
@@ -309,6 +305,26 @@ QUI.objToArr = function (...obj) {
         arr = obj
     }
     return arr
+}
+
+/**
+ * 冻结对象属性
+ * @param {*} obj 对象
+ * @param {*} arr 需要冻结属性集合，可省略
+ */
+QUI.ObjectFreeze = async function (obj,arr) {
+    if(!this.isEmpty(obj)){
+        if(this.isEmpty(arr)){
+            //冻结全部对象
+            Object.freeze(obj)
+        }else{
+            if (this.isArray(arr)) {
+                arr.forEach(item=>{
+                    Object.freeze(obj[item])
+                })
+            }
+        }
+    }
 }
 
 /**
