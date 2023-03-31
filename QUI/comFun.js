@@ -326,7 +326,7 @@ QUI.isWeiXin = function isWeiXin() {
  * @param {*} id 盒子唯一id，没有ID的时候取body的属性
  * @returns 
  */
-QUI.getBoxRect = function (id = ""){
+QUI.getBoxRect = function (id = "") {
     return (document.getElementById(id) ?? document.body).getBoundingClientRect();
 }
 
@@ -342,7 +342,7 @@ QUI.objToArr = function (...obj) {
     } else if (this.isArray(obj)) {
         arr = obj
     }
-    
+
     return arr
 }
 
@@ -709,12 +709,18 @@ QUI.createQRcode = function (options) {
 
 /**
  *  图片预览加载调用
+ *  仅对父级盒子className = "viewer-img-box" 里面的图片生效
  */
 QUI.loadViewer = function () {
-	document.getElementsByTagName("img")[0].onclick = function(){
-		let imger = new Viewer(this.src)
-		imger.viewer()
-	}
+    document.body.addEventListener('click', function (e) {
+        let type = e.target.tagName
+        let parent = e.target.parentNode
+        if(type === 'IMG' && parent.className === 'viewer-img-box' ){
+            let src = e.target.src
+            let imger = new Viewer(src)
+            imger.viewer()
+        }
+    }, true)
 }
 
 /**

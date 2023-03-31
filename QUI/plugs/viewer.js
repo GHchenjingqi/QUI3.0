@@ -7,7 +7,6 @@ class viewer {
         this.src = src
     }
     viewer() {
-        debugger
         this.creatLayer()
         this.listenEvent()
     }
