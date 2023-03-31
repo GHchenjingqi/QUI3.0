@@ -4,20 +4,21 @@
  * @Last Modified by:   cjq 
  * @Last Modified time: 2023-03-Th 10:00:37 
  */
+import { QRCode, Viewer } from './plugs/index.js'
 let QUI = {
     title: "QUI插件",
     name: "QUI",
-    des: "QUI.js是一款开源的前端轻量UI插件，能与JQuery,Swiper,Vue,Bootstraps,小程序,Wordpress等框架轻松耦合，尽量减少前端造轮子。QUI集成了ES6，HTML5，AJAX等JS常用API方法",
+    des: "QUI.js是一款开源的前端轻量UI插件，能与JQuery,Swiper,Vue,Bootstraps,小程序,Wordpress等框架轻松耦合，尽量减少前端造轮子。QUI集成了ES6，HTML5，AJAX,QRcode等JS常用API方法",
     version: "1.0",
     data: {
-        titleInPage: "欢迎回来，EMO~", //进入页面提示语
-        titleOutPage: "不要走嘛，再看看！", //进入页面提示语
-        resourcePath:"https://cdn.jsdelivr.net/gh/GHchenjingqi/resources/"
+        titleInPage: "期待下次再见到你，EMO~", //进入页面提示语
+        titleOutPage: "哦豁，终于等到你！", //进入页面提示语
+        resourcePath: "https://cdn.jsdelivr.net/gh/GHchenjingqi/resources/"
     },
     // 功能数据
     dataBase: {
         // 主题背景
-        themes: [  {
+        themes: [{
             id: "t3",
             name: "机车靓妹",
             files: "images/bz03.jpg",
@@ -37,10 +38,10 @@ let QUI = {
  * 初始化必须数据
  * @param {*} debugShow 
  */
-QUI.init = async function (debugShow = true) {
+QUI.init = async function (options) {
+    let { debug = true, QRoptions } = options
     //禁用调试
-    if (debugShow) {
-        this.debugs = this.debugs
+    if (!debug) {
         this.debugs.forEach((item) => {
             console[item] = function () { return null }
         })
@@ -51,17 +52,26 @@ QUI.init = async function (debugShow = true) {
     this.windowSize();
     //Dom宽度
     this.getPageSize()
-    this.dataBase.url = this.getUrl()
+    this.dataBase.route = this.getUrl()
     //音效扩展
     await this.setAudios()
-    // 测试打印
+    //二维码插件
+    if (QRoptions) {
+        window.QRCode = QRCode
+        if (!this.isEmpty(QRoptions)) {
+            this.createQRcode(QRoptions)
+        }
+    }
+    //图片预览
+    this.loadViewer()
+    //测试打印
     this.error(this)
 }
 
 /**
  * 设备分辨率
  */
-QUI.windowSize = async function () {
+QUI.windowSize = function () {
     let h = window.screen.height;
     let w = window.screen.width;
     this.screen = {
@@ -74,9 +84,8 @@ QUI.windowSize = async function () {
  * 获取当前页面DOM宽度
  */
 QUI.getPageSize = function () {
-    this.dom = {}
-    this.dom.width = document.body.getBoundingClientRect().width
-    this.dom.height = document.body.getBoundingClientRect().height
+    const body = document.body.getBoundingClientRect();
+    this.dom = { width: body.width, height: body.height };
 }
 
 /**
@@ -97,7 +106,17 @@ QUI.titleChange = function () {
         }
     });
 }
-
+QUI.titleChange = function () {
+    const { titleInPage, titleOutPage } = QUI.data;
+    let originTitle = document.title, titleTime;
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            [document.title, titleTime] = [titleInPage, clearTimeout(titleTime)];
+        } else {
+            [document.title, titleTime] = [titleOutPage, new Promise(resolve => setTimeout(resolve, 1000)).then(() => document.title = originTitle)];
+        }
+    });
+}
 // 常用方法归档：
 /**
  * Log打印
@@ -107,13 +126,20 @@ QUI.titleChange = function () {
 QUI.log = function (val) {
     return console.log(val)
 }
+QUI.log = function (val) {
+    if (window.console && window.console.log) {
+        return console.log(val)
+    }
+}
 /**
  * Error打印
  * @param {*} val 
  * @returns 
  */
 QUI.error = function (val) {
-    return console.error(val)
+    if (window.console && window.console.error) {
+        return console.error(val)
+    }
 }
 
 /**
@@ -144,11 +170,14 @@ QUI.getUrl = function () {
  * @returns 布尔
  */
 QUI.isEmpty = function (obj) {
-    if (obj == undefined || obj == null || obj == '' || obj == [] || obj == {}) {
+    const conditions = [undefined, null, '', {}];
+    if (Array.isArray(obj) && obj.length === 0) {
         return true;
-    } else {
-        return false;
     }
+    if (conditions.some(condition => obj === condition)) {
+        return true;
+    }
+    return false;
 }
 
 /**
@@ -293,6 +322,15 @@ QUI.isWeiXin = function isWeiXin() {
 }
 
 /**
+ * 获取div盒子尺寸属性
+ * @param {*} id 盒子唯一id，没有ID的时候取body的属性
+ * @returns 
+ */
+QUI.getBoxRect = function (id = ""){
+    return (document.getElementById(id) ?? document.body).getBoundingClientRect();
+}
+
+/**
  * 对象转数组 多参数字符串转数组  —— objToArr(a,b,c)
  * @param  {...any} obj 
  * @returns array
@@ -304,6 +342,7 @@ QUI.objToArr = function (...obj) {
     } else if (this.isArray(obj)) {
         arr = obj
     }
+    
     return arr
 }
 
@@ -312,18 +351,18 @@ QUI.objToArr = function (...obj) {
  * @param {*} obj 对象
  * @param {*} arr 需要冻结属性集合，可省略
  */
-QUI.ObjectFreeze = async function (obj,arr) {
-    if(!this.isEmpty(obj)){
-        if(this.isEmpty(arr)){
-            //冻结全部对象
-            Object.freeze(obj)
-        }else{
-            if (this.isArray(arr)) {
-                arr.forEach(item=>{
-                    Object.freeze(obj[item])
-                })
-            }
-        }
+QUI.objectFreeze = async function (obj, arr) {
+    if (this.isEmpty(obj)) { return }
+    if (this.isEmpty(arr)) {
+        //冻结全部对象
+        Object.freeze(obj)
+        return
+    }
+    if (this.isArray(arr)) {
+        arr.forEach(item => {
+            Object.freeze(obj[item])
+        })
+        return
     }
 }
 
@@ -372,16 +411,12 @@ QUI.loadScript = function (url, callback) {
  * @returns 
  */
 QUI.debounce = function (func, delay) {
-    var timer = null;
+    let timer;
     return function () {
-        var that = this;
-        var args = arguments
-        //每次触发事件 都把定时器清掉重新计时
-        clearTimeout(timer)
-        timer = setTimeout(function () {
-            //执行事件处理程序
-            func.call(that, args)
-        }, delay)
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            func.apply(this, arguments);
+        }, delay);
     }
 }
 
@@ -392,21 +427,42 @@ QUI.debounce = function (func, delay) {
  * @returns 
  */
 QUI.throttle = function (func, delay) {
-    var timer = null;
+    let timer;
     return function () {
-        var that = this;
-        var args = arguments
         if (!timer) {
-            timer = setTimeout(function () {
-                //执行事件处理程序
-                func.call(that, args)
-                //事件执行完后把定时器清除掉，下次触发事件的时候再设置
+            timer = setTimeout(() => {
+                func.apply(this, arguments);
                 timer = null;
-            }, delay)
+            }, delay);
         }
     }
 }
 
+/**
+ * 节流+防抖
+ * @param {*} func 
+ * @param {*} delay 
+ * @returns 
+ */
+QUI.debounceAndThrottle = function (func, delay) {
+    let timer;
+    let lastExecTime = 0;
+    return function () {
+        const context = this;
+        const args = arguments;
+        const currentTime = Date.now();
+        if (currentTime - lastExecTime > delay) {
+            lastExecTime = currentTime;
+            func.apply(context, args);
+        } else {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                lastExecTime = currentTime;
+                func.apply(context, args);
+            }, delay - (currentTime - lastExecTime));
+        }
+    }.bind(this); // 绑定函数的this指向
+}
 
 /**
  * 时间格式化
@@ -628,6 +684,37 @@ QUI.romCode = function (n) {
         res += str[QUI.Random(0, 62)];
     }
     return res;
+}
+
+/**
+ * 二维码生成
+ * @param {*} options 
+ */
+QUI.createQRcode = function (options) {
+    let { id, text, width = 88, height = 88, color } = options
+    document.getElementById(id).innerHTML = ""
+    new QRCode(id, {
+        //文字内容
+        text: text,
+        //宽度
+        width: width,
+        //高度
+        height: height,
+        //颜色
+        colorDark: color,
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+}
+
+/**
+ *  图片预览加载调用
+ */
+QUI.loadViewer = function () {
+	document.getElementsByTagName("img")[0].onclick = function(){
+		let imger = new Viewer(this.src)
+		imger.viewer()
+	}
 }
 
 /**
@@ -868,23 +955,23 @@ QUI.SessionStg = new Storage("sessionStorage");
 
 //扩展函数
 QUI.setAudios = async function () {
-   await this.setPianoAudio()
+    await this.setPianoAudio()
 }
 /**
  * 添加钢琴音效
  */
- QUI.setPianoAudio = async function () {
-    if(this.isEmpty(this.dataBase.voices)){
+QUI.setPianoAudio = async function () {
+    if (this.isEmpty(this.dataBase.voices)) {
         let piano = {
             id: "v0",
             title: "钢琴C大调",
             lists: []
         };
-        [1,2,3,4,5,6,7].forEach(item=>{
+        [1, 2, 3, 4, 5, 6, 7].forEach(item => {
             let obj = {
-               id: `v0_0${item}`,
-               name: `C${item}`,
-               files:`musics/piano/c${item}.mp3`
+                id: `v0_0${item}`,
+                name: `C${item}`,
+                files: `musics/piano/c${item}.mp3`
             }
             piano.lists.push(obj)
         })

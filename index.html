@@ -8,13 +8,23 @@
 	<link rel="stylesheet" href="./css/ui.3.2.css">
 	<title>Document</title>
 	<style>
-		.content{width: 1400px;margin-left: auto;margin-right: auto;}
+		.header{height: .4rem;background: var(--white);box-shadow:0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02)}
 		.box{margin-bottom: 50px;}.box h1{margin-bottom: 20px;}
+		.fix-ewm{position: fixed;bottom: 50px;right: 50px;z-index: 33;}
+		.mt1{margin-top: .3rem;}
+		.logo {height: .4rem;display: inline-flex;justify-content: flex-start;align-items: center;}
+		.logo img{height: .24rem;}
+		.logo span{font-size: .14rem;font-weight: 600;margin-left: 8px;}
 	</style>
 </head>
 <body>
+	<div class="header">
+		<div class="content">
+			<div class="logo"><img src="./css/icons/logo.svg" alt=""><span>QUI</span></div>		
+		</div>
+	</div>
 	<div class="content">
-		<div class="box">
+		<div class="box mt1">
 			<h1>Text 文本</h1>
 			<row>
 				<h1>H1:月落乌啼霜满天</h1>
@@ -43,6 +53,21 @@
 					<li>禁用：行动点不可用的时候，一般需要文案解释。</li>
 					<li>加载中：用于异步操作等待反馈的时候，也可以避免多次提交。</li>
 				</ol>
+			</row>
+		</div>
+		<div class="box">
+			<h1>Icon 图标</h1>
+			<row>
+				<i class="icon icon-airplay"></i>
+				<i class="icon icon-video"></i>
+				<i class="icon icon-tv"></i>
+				<i class="icon icon-heart"></i>
+			</row>
+		</div>
+		<div class="box">
+			<h1>image 图片</h1>
+			<row>
+				<img class="img" width="200" src="https://cdn.staticaly.com/gh/GHchenjingqi/picx-images-hosting@master/084925tI2CY.1b5fr0lah8ow.webp" alt="">
 			</row>
 		</div>
 		<div class="box">
@@ -85,19 +110,26 @@
 				<button type="border" circle disabled>禁用按钮</button>
 			</row>
 		</div>
-
+		<div class="fix-ewm">
+			<div id="qrcode"></div>
+		</div>
 	</div>
-
-
-
 	<script type="module">
 		import Q from "./QUI/main.js"
 		// 运行Q入口函数
 		let options = {
 			callback:"init",
-			debug:true
+			debug:true,
+			QRoptions:{
+				text:window.location.href,
+				id:'qrcode',
+				color:'#333'
+			}
 		}
 		await Q.startRun(options)
+		Q.titleChange()
+		
+		let box = Q.getBoxRect()
 	</script>
 </body>
 </html>

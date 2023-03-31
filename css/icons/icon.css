@@ -1,0 +1,47 @@
+/*
+* feather 图标
+* 官方地址：https://feathericons.com/
+*/
+.icon{
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+    cursor: pointer;
+}
+/* 可扩展 */
+.icon-airplay{
+    background-image:url('./feather/airplay.svg') ;
+}
+.icon-video{
+    background-image:url('./feather/video.svg') ;
+}
+.icon-tv{
+    background-image:url('./feather/tv.svg') ;
+}
+.icon-share{
+    background-image:url('./feather/share.svg') ;
+}
+.icon-heart{
+    background-image:url('./feather/heart.svg') ;
+}
+.icon-x{
+    background-image:url('./feather/x.svg') ;
+}
+.icon-x{
+    background-image:url('./feather/x.svg') ;
+}
+.icon-rotateL{
+    background-image:url('./feather/rotate-ccw.svg') ;
+}
+.icon-rotateR{
+    background-image:url('./feather/rotate-cw.svg') ;
+}
+.icon-zoomIn{
+    background-image:url('./feather/zoom-in.svg') ;
+}
+.icon-zoomOut{
+    background-image:url('./feather/zoom-out.svg') ;
+}

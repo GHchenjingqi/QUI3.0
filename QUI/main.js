@@ -39,17 +39,17 @@ class QUI {
 			this.log("~~~Body页面宽高:" + document.body.clientWidth + "*" + document.body.clientHeight)
 		}
 	}
-	__listen(callback,debug) {
+	__listen(callback,opt) {
 		let that = this
 		window.addEventListener("resize", function () {
-			that.__reset(callback,debug)
+			that.__reset(callback,opt)
 		})
 	}
-	async __reset( callback,debug) {
+	async __reset( callback,opt) {
 		console.clear()
 		this.__setRem()
 		if (callback) {
-			await this[callback](debug)
+			await this[callback](opt)
 		}
 	}
 	__setRem(){
@@ -75,14 +75,15 @@ class QUI {
 	async endRun() { }
 	//开始
 	async startRun(options) {
-		let { callback, debug = false, timeFlag, devFlag } = {...options}
+		let { callback, debug = false, timeFlag, devFlag,QRoptions } = options
 		//开始函数执行前执行beforeRun
 		this.__setRem()
 		// 冻结数据
 		await this.beforeRun()
 		//执行回调
+		let opt = {debug,QRoptions}
 		if (callback) {
-			await this[callback](debug)
+			await this[callback](opt)
 		}
 		this.log("Enter QUI Start Fun:")
 		this.__info()
@@ -90,12 +91,12 @@ class QUI {
 			this.__time()
 		}
 		this.__device(devFlag)
-		this.__listen(callback,debug)
+		this.__listen(callback,opt)
 		//开始函数执行完成后执行endRun
 		await this.endRun()
 		this.log("Leave QUI Start Fun.")
 	}
 }
 var Q = Object.assign(new QUI(), comFun)
-await Q.ObjectFreeze(Q,["title","name","des","version"])
+await Q.objectFreeze(Q,["title","name","des","version"])
 export default Q

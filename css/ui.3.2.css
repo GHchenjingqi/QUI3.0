@@ -1,5 +1,5 @@
 @charset "utf-8";
-
+@import url('./icons/icon.css');
 /* QUI V3.0 初始化样式版
  * Author:陈小知&七娃博客
  * Data:2021.02.22 15:07:56
@@ -357,7 +357,7 @@ h6 {
 }
 
 h1 {
-    font-size: .24rem;
+    font-size: .22rem;
 }
 
 h2 {
@@ -532,15 +532,11 @@ a {
     color: var(--main-color);
 }
 .content {
+    width: 1400px;
     margin: 0 auto;
 }
-
-.content[width='100'] {
-    width: 100%;
-}
-
-.content[width='960'] {
-    width: 960px;
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+    .content{width: 80%;}
 }
 
 .text-h1 {
@@ -590,6 +586,9 @@ a {
 
     .pc {
         display: none;
+    }
+    .content{
+        width: 90%;
     }
 }
 
@@ -1345,14 +1344,23 @@ a {
     width: 100%;
     height: 100%;
     position: fixed;
-    background: rgba(0, 0, 0, .55);
     z-index: 666;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0
 }
-
+.qui-boom-layer{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: rgba(0, 0, 0, .45);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
 .qui-boom-top {
     border-radius: 0rem;
     overflow: hidden;
@@ -1371,6 +1379,21 @@ a {
     transform: translate(-50%, -50%)
 }
 
+.qui-boom-img{
+    overflow: hidden;
+    position: absolute;
+    z-index: 2;
+    min-width: 90%;
+    top: 50%;
+    left: 50%;
+    cursor: grab;
+    transform: translate(-50%, -50%);
+    transition: all .3s;
+}
+.qui-boom-img img{
+    width: auto;
+    height: auto;
+}
 .qui-boom-bottom {
     overflow: hidden;
     position: absolute;
