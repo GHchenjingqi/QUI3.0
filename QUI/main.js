@@ -69,6 +69,19 @@ class QUI {
 		document.documentElement.style.fontSize = rem + 'px'
 		
 	}
+	__loading(){
+		let div = document.createElement("div");
+        div.className = "qui-loading";
+		div.innerHTML = `<img src="./css/icons/loading.gif" alt="加载中...">`;
+		document.body.style.height = "100vh"
+        document.body.style.overflow = "hidden"
+		document.body.appendChild(div)
+	}
+	__removeLoading(){
+		document.body.removeChild(document.getElementsByClassName("qui-loading")[0])
+		document.body.style.height = "auto"
+        document.body.style.overflow = "auto"
+	}
 	//start前执行
 	async beforeRun() { }
 	//start后执行
@@ -77,6 +90,7 @@ class QUI {
 	async startRun(options) {
 		let { callback, debug = false, timeFlag, devFlag,QRoptions } = options
 		//开始函数执行前执行beforeRun
+		this.__loading()
 		this.__setRem()
 		// 冻结数据
 		await this.beforeRun()
@@ -94,9 +108,9 @@ class QUI {
 		this.__listen(callback,opt)
 		//开始函数执行完成后执行endRun
 		await this.endRun()
+		this.__removeLoading()
 		this.log("Leave QUI Start Fun.")
 	}
 }
 var Q = Object.assign(new QUI(), comFun)
-await Q.objectFreeze(Q,["title","name","des","version"])
 export default Q

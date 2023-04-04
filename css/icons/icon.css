@@ -11,6 +11,7 @@
     background-size: 32px;
     cursor: pointer;
 }
+.icon:hover{opacity: .6;}
 /* 可扩展 */
 .icon-airplay{
     background-image:url('./feather/airplay.svg') ;
@@ -30,18 +31,24 @@
 .icon-x{
     background-image:url('./feather/x.svg') ;
 }
-.icon-x{
-    background-image:url('./feather/x.svg') ;
-}
 .icon-rotateL{
     background-image:url('./feather/rotate-ccw.svg') ;
 }
 .icon-rotateR{
     background-image:url('./feather/rotate-cw.svg') ;
 }
-.icon-zoomIn{
+.icon-zoom-in{
     background-image:url('./feather/zoom-in.svg') ;
 }
-.icon-zoomOut{
+.icon-zoom-out{
     background-image:url('./feather/zoom-out.svg') ;
+}
+.icon-alert-warn{
+    background-image:url('./feather/alert-circle.svg') ;
+}
+.icon-alert-right{
+    background-image:url('./feather/check-circle.svg') ;
+}
+.icon-alert-error{
+    background-image:url('./feather/x-circle.svg') ;
 }

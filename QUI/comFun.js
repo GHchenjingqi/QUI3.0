@@ -4,7 +4,7 @@
  * @Last Modified by:   cjq 
  * @Last Modified time: 2023-03-Th 10:00:37 
  */
-import { QRCode, Viewer } from './plugs/index.js'
+import { QRCode, Viewer, Messages, PopLayer} from './plugs/index.js'
 let QUI = {
     title: "QUI插件",
     name: "QUI",
@@ -64,6 +64,9 @@ QUI.init = async function (options) {
     }
     //图片预览
     this.loadViewer()
+    //消息提示
+    window.Messages = Messages
+    window.Layer = PopLayer
     //测试打印
     this.error(this)
 }
@@ -715,11 +718,14 @@ QUI.loadViewer = function () {
     document.body.addEventListener('click', function (e) {
         let type = e.target.tagName
         let parent = e.target.parentNode
-        if(type === 'IMG' && parent.className === 'viewer-img-box' ){
-            let src = e.target.src
-            let imger = new Viewer(src)
-            imger.viewer()
-        }
+        // 保证只允许一个插件运行
+        if(!window.imger){
+            if(type === 'IMG' && parent.className === 'viewer-img-box' ){
+                let src = e.target.src
+                window.imger = new Viewer(src)
+                window.imger.viewer()
+            }
+        }        
     }, true)
 }
 

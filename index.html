@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,19 +9,54 @@
 	<link rel="stylesheet" href="./css/ui.3.2.css">
 	<title>Document</title>
 	<style>
-		.header{height: .4rem;background: var(--white);box-shadow:0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02)}
-		.box{margin-bottom: 50px;}.box h1{margin-bottom: 20px;}
-		.fix-ewm{position: fixed;bottom: 50px;right: 50px;z-index: 33;}
-		.mt1{margin-top: .3rem;}
-		.logo {height: .4rem;display: inline-flex;justify-content: flex-start;align-items: center;}
-		.logo img{height: .24rem;}
-		.logo span{font-size: .14rem;font-weight: 600;margin-left: 8px;}
+		.header {
+			height: .4rem;
+			background: var(--white);
+			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02)
+		}
+
+		.box {
+			margin-bottom: 50px;
+		}
+
+		.box h1 {
+			margin-bottom: 20px;
+		}
+
+		.fix-ewm {
+			position: fixed;
+			bottom: 50px;
+			right: 50px;
+			z-index: 33;
+		}
+
+		.mt1 {
+			margin-top: .3rem;
+		}
+
+		.logo {
+			height: .4rem;
+			display: inline-flex;
+			justify-content: flex-start;
+			align-items: center;
+		}
+
+		.logo img {
+			height: .24rem;
+		}
+
+		.logo span {
+			font-size: .14rem;
+			font-weight: 600;
+			margin-left: 8px;
+		}
 	</style>
 </head>
+
 <body>
 	<div class="header">
 		<div class="content">
-			<div class="logo"><img src="./css/icons/logo.svg" alt=""><span>QUI</span></div>		
+			<div class="logo"><img src="./css/icons/logo.svg" alt=""><span>QUI</span></div>
 		</div>
 	</div>
 	<div class="content">
@@ -35,7 +71,9 @@
 				<h6>H5:月落乌啼霜满天</h6>
 			</row>
 			<row>
-				<p>段落：<a href="http://www.baidu.com">百度</a>全新一代知识增强大语言模型，文心大模型家族的新成员，能够与人对话互动，回答问题，协助创作，高效便捷地帮助人们获取信息、知识和灵感。</p>
+				<p>段落：<a
+						href="http://www.baidu.com">百度</a>全新一代知识增强大语言模型，文心大模型家族的新成员，能够与人对话互动，回答问题，协助创作，高效便捷地帮助人们获取信息、知识和灵感。
+				</p>
 				<p>段落当需要展示标题、段落、列表内容时使用，如文章/博客/日志的文本样式。</p>
 			</row>
 			<row>
@@ -67,26 +105,28 @@
 		<div class="box">
 			<h1>image 图片</h1>
 			<row class="viewer-img-box">
-				<img  width="200" src="https://cdn.staticaly.com/gh/GHchenjingqi/picx-images-hosting@master/084925tI2CY.1b5fr0lah8ow.webp" alt="">
+				<img width="200"
+					src="https://cdn.staticaly.com/gh/GHchenjingqi/picx-images-hosting@master/084925tI2CY.1b5fr0lah8ow.webp"
+					alt="">
 			</row>
 		</div>
 		<div class="box">
 			<h1>Button 按钮</h1>
 			<row>
-				<button class="white">白色按钮</button>	
+				<button class="white">白色按钮</button>
 				<button>默认按钮</button>
 				<button class="black">黑色按钮</button>
 				<button class="yellow">警告按钮</button>
-				<button class="green">成功按钮</button>	
+				<button class="green">成功按钮</button>
 				<button class="red">危险按钮</button>
 				<button disabled>禁用按钮</button>
 			</row>
 			<row>
-				<button class="white">白色按钮</button>	
+				<button class="white">白色按钮</button>
 				<button type="border">描边按钮</button>
 				<button class="black" type="border">黑色按钮</button>
 				<button class="yellow" type="border">警告按钮</button>
-				<button class="green" type="border">成功按钮</button>	
+				<button class="green" type="border">成功按钮</button>
 				<button class="red" type="border">危险按钮</button>
 				<button type="border" class="white" disabled>禁用按钮</button>
 
@@ -96,40 +136,97 @@
 				<button circle>圆角默认色</button>
 				<button class="black" circle>黑色按钮</button>
 				<button class="yellow" circle>警告按钮</button>
-				<button class="green" circle>成功按钮</button>	
+				<button class="green" circle>成功按钮</button>
 				<button class="red" circle>危险按钮</button>
 				<button class="white" circle disabled>禁用按钮</button>
 			</row>
 			<row>
-				<button class="white"  circle>圆角白色</button>
+				<button class="white" circle>圆角白色</button>
 				<button type="border" circle>圆角默认色</button>
 				<button class="black" type="border" circle>黑色按钮</button>
 				<button class="yellow" type="border" circle>警告按钮</button>
-				<button class="green" type="border" circle>成功按钮</button>	
+				<button class="green" type="border" circle>成功按钮</button>
 				<button class="red" type="border" circle>危险按钮</button>
 				<button type="border" circle disabled>禁用按钮</button>
+			</row>
+		</div>
+		<div class="box">
+			<h1>Mseeage 提示</h1>
+			<row>
+				<button  class="white"  id="textMsg">文字提示</button>
+				<button id="sucMsg" class="green" >成功提示</button>
+				<button id="warnMsg" class="yellow">注意提示</button>
+				<button id="errMsg" class="red">危险提示</button>
+			</row>
+		</div>
+		<div class="box">
+			<h1>Layer 弹窗</h1>
+			<row>
+				<button  class="white"  id="textPop">文字弹窗</button>
+				<button id="imgPop">图片弹窗</button>
 			</row>
 		</div>
 		<div class="fix-ewm">
 			<div id="qrcode"></div>
 		</div>
 	</div>
+
+
+
 	<script type="module">
 		import Q from "./QUI/main.js"
 		// 运行Q入口函数
 		let options = {
-			callback:"init",
-			debug:true,
-			QRoptions:{
-				text:window.location.href,
-				id:'qrcode',
-				color:'#333'
+			callback: "init",
+			debug: true,
+			QRoptions: {
+				text: window.location.href,
+				id: 'qrcode',
+				color: '#333'
 			}
 		}
 		await Q.startRun(options)
 		Q.titleChange()
+		//消息提示
+		document.getElementById("sucMsg").onclick = function(){
+			let msg2 = new Messages({type:"success", msg:"成功了！"})
+			msg2.show()
+		}
+		document.getElementById("textMsg").onclick = function(){
+			let msg = new Messages({msg:"你好，欢迎来到QUI，这里是一段提示语！"})
+			msg.show()
+		}
+		document.getElementById("warnMsg").onclick = function(){
+			let msg1 = new Messages({type:"warn", msg:"警告，危险操作！"})
+			msg1.show()
+		}
+		document.getElementById("errMsg").onclick = function(){
+			let msg = new Messages({type:"error", msg:"抱歉！未找到"})
+			msg.show()
+		}
+		//弹窗
+		document.getElementById("textPop").onclick = function(){
+			let popoptions = {
+				title: "温馨提示",
+				content: "您的会员已于23年10月1日到期，请重置！",
+				width: 500,
+				buttons: "cancle|confirm",
+				position: "center",
+			}
+			let modle = new Layer(popoptions)
+			modle.show()
+		}
+		document.getElementById("imgPop").onclick = function(){
+			let popoptions = {
+				width: 600,
+				src:"https://cdn.staticaly.com/gh/GHchenjingqi/picx-images-hosting@master/084925tI2CY.1b5fr0lah8ow.webp",
+				layerType:"image"
+			}
+			let modle = new Layer(popoptions)
+			modle.show()
+		}
 		
-		let box = Q.getBoxRect()
 	</script>
 </body>
+
 </html>

@@ -213,6 +213,7 @@ input[type=reset],
 button {
     line-height: 38px;
     padding: 0 28px;
+    margin: 4px;
     border-radius: 6px;
     background: var(--blue);
     color: var(--white);
@@ -1338,7 +1339,20 @@ a {
 .vasp {
     vertical-align: super
 }
- 
+
+.qui-loading{
+    position: fixed;
+    z-index: 9999999999;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /*弹框*/
 .qui-boom {
     width: 100%;
@@ -1361,32 +1375,14 @@ a {
     right: 0;
     bottom: 0;
 }
-.qui-boom-top {
-    border-radius: 0rem;
-    overflow: hidden;
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    right: 0
-}
-
-.qui-boom-center {
-    overflow: hidden;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%)
-}
-
 .qui-boom-img{
-    overflow: hidden;
     position: absolute;
     z-index: 2;
     min-width: 90%;
     top: 50%;
     left: 50%;
     cursor: grab;
+    text-align: center;
     transform: translate(-50%, -50%);
     transition: all .3s;
 }
@@ -1394,15 +1390,148 @@ a {
     width: auto;
     height: auto;
 }
+.qui-boom-top {
+    border-radius: 0rem;
+    overflow: hidden;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: .16rem;
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+.qui-boom-center {
+    overflow: hidden;
+    position: absolute;
+    padding: .16rem;
+    box-sizing: border-box;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+.qui-boom-title{
+    font-size: .14rem;
+    font-weight: 500;
+    color: #232323;
+}
+.qui-boom-content{
+    font-size: .1rem;
+    margin-top: .05rem;
+    margin-bottom: .1rem;
+}
+.qui-boom-left-bottom,.qui-boom-bottom-left{
+    overflow: hidden;
+    position: absolute;
+    padding: .16rem;
+    box-sizing: border-box;
+    bottom: 20px;
+    z-index: 2;
+    left: 20px;
+}
+.qui-boom-right-bottom,.qui-boom-bottom-right{
+    overflow: hidden;
+    position: absolute;
+    padding: .16rem;
+    box-sizing: border-box;
+    bottom: 20px;
+    z-index: 2;
+    right: 20px;
+}
+.qui-boom-right-center,.qui-boom-center-right{
+    overflow: hidden;
+    position: absolute;
+    padding: .16rem;
+    box-sizing: border-box;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    right: 20px;
+}
+.qui-boom-left-center,.qui-boom-center-left{
+    overflow: hidden;
+    position: absolute;
+    padding: .16rem;
+    box-sizing: border-box;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    left: 20px;
+}
+.qui-boom-left-top,.qui-boom-top-left{
+    overflow: hidden;
+    position: absolute;
+    padding: .16rem;
+    box-sizing: border-box;
+    top: 20px;
+    z-index: 2;
+    left: 20px;
+}
+.qui-boom-right-top,.qui-boom-top-right{
+    overflow: hidden;
+    position: absolute;
+    padding: .16rem;
+    box-sizing: border-box;
+    top: 20px;
+    z-index: 2;
+    right: 20px;
+}
 .qui-boom-bottom {
     overflow: hidden;
     position: absolute;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    right: 0
+    padding: .16rem;
+    box-sizing: border-box;
+    bottom: 20px;
+    z-index: 2;
+    transform: translateX(-50%);
+    left: 50%;
 }
-
+.qui-boom-icon-close{
+    position: absolute;
+    top: .1rem;
+    right: .1rem;
+}
+.qui-boom-icon-close i{
+    width: .08rem;
+    height: .08rem;
+    opacity: .4;
+}
+.ui-messages{
+    position: fixed;
+    z-index: 5;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.ui-messages .item{
+    background-color: #fff;
+    padding: 6px 16px;
+    border-radius: 6px;
+    display: inline-flex;
+    width: auto;
+    justify-content: center;
+    align-items: flex-start;
+    box-shadow: 2px 4px 16px rgba(0, 0, 0, .12);
+    margin-bottom: 20px;
+    font-size: .08rem;
+    transition: all ease-in-out .3s;
+}
+.ui-messages .item.success{
+    color: var(--green);
+}
+.ui-messages .item.warn{
+    color: var(--yellow);
+}
+.ui-messages .item.error{
+    color: var(--red);
+}
+.ui-messages svg{width: .12rem;height: .12rem;margin-right: .03rem;}
+.ui-messages span{color: #333;}
 .foot-fixed {
     position: fixed;
     width: 100%;
@@ -1411,7 +1540,20 @@ a {
     z-index: 666;
     right: 0
 }
-
+.viewer-oper{
+    background: rgba(255, 255, 255, .8);
+    margin: 0 auto;
+    padding: 4px 16px;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 5;
+    left: 50%;
+    transform: translateX(-50px);
+    bottom: 20px;
+}
 /*其他*/
 .sel-all {
     -webkit-user-select: all !important;
