@@ -780,7 +780,7 @@ QUI.ajax = function (options) {
     var url = options.url || location.pathname;
     //如果参数不是false，那就默认是true，发异步请求
     var async = options.async == false ? false : true;
-    var params = options.data;
+    var params =  options.data ? JSON.stringify( options.data ) : '';
     var xhr = new XMLHttpRequest();
     //设置请求行
     if (type == "get") {
