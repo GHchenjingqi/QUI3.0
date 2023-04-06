@@ -143,13 +143,13 @@ html {
 body{
     font-size: 14px; 
     line-height: 1.5;  
-    color: #272727;
+    color: var(--textColor);
 }
 button,
 input,
 select,
 textarea {
-    color: #272727;
+    color: var(--textColor);
     word-break: break-all
 }
 
@@ -198,7 +198,7 @@ input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=reset]
 }
 
 input:not([type=checkbox]):not([type=radio]):focus {
-    box-shadow: 0 0 0 1px #0075ff
+    box-shadow: 0 0 0 1px var(--blue);
 }
 
 input[type=checkbox],
@@ -238,7 +238,7 @@ button:active{
 
 button.white,button.bai {
     background: var(--white);
-    color: #333;
+    color: var(--textColor);
     border: 1px solid #eee
 }
 button.white:hover,button.bai:hover {
@@ -354,7 +354,7 @@ h6 {
     font-size: 100%;
     margin: 0;
     margin-bottom: .06rem;
-    color: #000;
+    color: var(--titleColor);
 }
 
 h1 {
@@ -1389,12 +1389,12 @@ a {
 .qui-boom-img img{
     width: auto;
     height: auto;
-}
+}   
 .qui-boom-top {
     border-radius: 0rem;
     overflow: hidden;
     position: absolute;
-    top: 30px;
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
     padding: .16rem;
@@ -1415,12 +1415,13 @@ a {
 .qui-boom-title{
     font-size: .14rem;
     font-weight: 500;
-    color: #232323;
+    color: var(--titleColor);
 }
 .qui-boom-content{
     font-size: .1rem;
     margin-top: .05rem;
     margin-bottom: .1rem;
+    color: var(--textColor);
 }
 .qui-boom-left-bottom,.qui-boom-bottom-left{
     overflow: hidden;
@@ -1483,10 +1484,26 @@ a {
     position: absolute;
     padding: .16rem;
     box-sizing: border-box;
-    bottom: 20px;
+    bottom: 0;
     z-index: 2;
     transform: translateX(-50%);
     left: 50%;
+}
+.qui-boom-left {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    left: 0;
+}
+.qui-boom-right {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    right: 0;
 }
 .qui-boom-icon-close{
     position: absolute;
@@ -1531,7 +1548,44 @@ a {
     color: var(--red);
 }
 .ui-messages svg{width: .12rem;height: .12rem;margin-right: .03rem;}
-.ui-messages span{color: #333;}
+.ui-messages span{color: var(--textColor);}
+.ui-drawer{
+    background-color: #fff;
+    height: 100%;
+    width: 360px;
+    padding: 0;
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+}
+.qui-boom-right.ui-drawer{
+    right: -500px;
+}
+.ui-drawer-header{
+    height: .42rem;
+    padding: 0 .16rem;
+    box-sizing: border-box;
+    font-size: .12rem;
+    line-height: .42rem;
+    color: var(--titleColor);
+    font-weight: 600;
+    border-bottom: 2px solid #dedede;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ui-drawer-header i{
+    width: .08rem;
+    height: .08rem;
+    margin-right: .1rem;
+}
+.ui-drawer-content{
+    flex: 1;
+    padding: .16rem;
+    color: var(--textColor);
+    box-sizing: border-box;
+}
 .foot-fixed {
     position: fixed;
     width: 100%;
@@ -1603,4 +1657,6 @@ a {
     --white:#fff;
     --black:#111;
     --purple:#6e00ff;
+    --textColor:#565656;
+    --titleColor:#232323;
 }

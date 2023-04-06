@@ -5,6 +5,7 @@
  * * * * title —— 弹窗标题，String，可选
  * * * * content —— 弹窗内容，String，可选
  * * * * buttons —— 弹窗按钮，String，可选。多个按钮采用“|”分割:"cancle|confirm|submit"，按钮支持回调事件，使用横线-："submit-subEvent|ok-sucessEuent"
+ * * * * buttonAlign —— 弹窗按钮对齐方式，可选。值：right,left,center。 默认右对齐
  * * * * width —— 弹窗宽度，String，Number，可选。
  * * * * height —— 弹窗高度，String，Number，可选。
  * * * * radius —— 弹窗圆角，Number，可选。
@@ -32,7 +33,7 @@
  */
 class PopLayer{
     constructor(options){
-        let {title, content, buttons, width = 300, height='auto', radius = 2,layerType="normal",src, position="center"} = {...options}
+        let {title, content, buttons,buttonAlign ="right", width = 300, height='auto', radius = 2,layerType="normal",src, position="center"} = {...options}
         this.title = title
         this.content = content
         this.buttons = buttons
@@ -42,6 +43,7 @@ class PopLayer{
         this.layerType = layerType
         this.src = src
         this.position = position
+        this.buttonAlign = buttonAlign
     }
     show(){
         this.creatPop()
@@ -52,18 +54,18 @@ class PopLayer{
         let box = document.getElementsByClassName("qui-boom-layer")[0]
         let that = this
         box.addEventListener("click", function () {
-            that.close()
+            that.hide()
         });
         let close = document.getElementsByClassName("qui-boom-icon-close")[0]
         if(close){
             close.addEventListener("click", function () {
-                that.close()
+                that.hide()
             });
         }
         let cancleBtn = document.getElementById("cancle")
         if(cancleBtn){
             cancleBtn.addEventListener("click", function () {
-                that.close()
+                that.hide()
             });
         }
         //回调事件添加
@@ -105,7 +107,7 @@ class PopLayer{
                         }
                     });
                 }
-                btnHtml =   `<div class="qui-boom-btn text-right">${btnstr}</div>`
+                btnHtml =   `<div class="qui-boom-btn text-${this.buttonAlign}">${btnstr}</div>`
             }
             let endHtml =` <div class="qui-boom-icon-close"><i class="icon icon-x"></i></div></div>`
             div.innerHTML = startHtml + titleHtml + contentHtml + btnHtml + endHtml
@@ -125,7 +127,7 @@ class PopLayer{
         }
         return 	textlist[label] ? textlist[label] : label
     }
-    close(){
+    hide(){
         document.body.removeChild(document.getElementsByClassName("qui-boom")[0])
         document.body.style.height = "auto"
         document.body.style.overflow = "auto"

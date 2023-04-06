@@ -4,7 +4,7 @@
  * @Last Modified by:   cjq 
  * @Last Modified time: 2023-03-Th 10:00:37 
  */
-import { QRCode, Viewer, Messages, PopLayer} from './plugs/index.js'
+import { QRCode, Viewer, Messages, PopLayer, Drawer} from './plugs/index.js'
 let QUI = {
     title: "QUI插件",
     name: "QUI",
@@ -67,6 +67,7 @@ QUI.init = async function (options) {
     //消息提示
     window.Messages = Messages
     window.Layer = PopLayer
+    window.Drawer = Drawer
     //测试打印
     this.error(this)
 }

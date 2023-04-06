@@ -166,6 +166,16 @@
 				<button id="imgPop">图片弹窗</button>
 			</row>
 		</div>
+		<div class="box">
+			<h1>Drawer 抽屉</h1>
+			<row>
+				<button id="drawerUP">上</button>
+				<button id="drawerDown">下</button>
+				<button id="drawerLeft">左</button>
+				<button id="drawerRight">右</button>
+			</row>
+		</div>
+		
 		<div class="fix-ewm">
 			<div id="qrcode"></div>
 		</div>
@@ -211,6 +221,7 @@
 				content: "您的会员已于23年10月1日到期，请重置！",
 				width: 500,
 				buttons: "cancle|confirm",
+				buttonAlign:"right",
 				position: "center",
 			}
 			let modle = new Layer(popoptions)
@@ -224,6 +235,35 @@
 			}
 			let modle = new Layer(popoptions)
 			modle.show()
+		}
+		
+		document.getElementById("drawerUP").onclick = function(){
+			new Drawer({
+				title:"抽屉标题",
+				content:"抽屉内容",
+				direction:"top",
+			}).show()
+		}
+		document.getElementById("drawerDown").onclick = function(){
+			new Drawer({
+				title:"抽屉标题",
+				content:"抽屉内容",
+				direction:"bottom",
+			}).show()
+		}
+		document.getElementById("drawerLeft").onclick = function(){
+			new Drawer({
+				title:"抽屉标题",
+				content:"抽屉内容",
+				direction:"left",
+			}).show()
+		}
+		document.getElementById("drawerRight").onclick = function(){
+			new Drawer({
+				title:"抽屉标题",
+				content:"抽屉内容",
+				direction:"right",
+			}).show()
 		}
 		
 	</script>
