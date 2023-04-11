@@ -23,15 +23,15 @@ options参数：
 }
 
 ### JS数据类型判断
-isNumber()
-isString()
-isBoolean()
-isFunction()
-isObject()
-isArray()
-isDate()
-isNull()
-isUndefined()
+isNumber()  
+isString()  
+isBoolean()  
+isFunction()  
+isObject()  
+isArray()  
+isDate()  
+isNull()  
+isUndefined()  
 
 ### 获取数据类型
 getType(obj)
@@ -64,22 +64,22 @@ loadViewer()
 ### ajax
 ajax()
 ### Cookie使用
-Cookie.set()
-Cookie.get()
-Cookie.del()
-Cookie.clear()
+Cookie.set()  
+Cookie.get()  
+Cookie.del()  
+Cookie.clear()  
 
 ### LocalStorage使用 
-LocalStg.set()
-LocalStg.get()
-LocalStg.del()
-LocalStg.clear()
+LocalStg.set()  
+LocalStg.get()  
+LocalStg.del()  
+LocalStg.clear()  
 
 ### SessionStorage使用
-SessionStg.set()
-SessionStg.get()
-SessionStg.del()
-SessionStg.clear()
+SessionStg.set()  
+SessionStg.get()  
+SessionStg.del()  
+SessionStg.clear()  
 
 ...  
 以及时间格式的处理等方法，后续也会继续扩展常用正则等好玩的api。
