@@ -69,10 +69,10 @@ class QUI {
 		document.documentElement.style.fontSize = rem + 'px'
 		
 	}
-	__loading(){
+	__loading(loadingSrc){
 		let div = document.createElement("div");
         div.className = "qui-loading";
-		div.innerHTML = `<img src="./css/icons/loading.gif" alt="加载中...">`;
+		div.innerHTML = `<img src="${loadingSrc}" alt="加载中...">`;
 		document.body.style.height = "100vh"
         document.body.style.overflow = "hidden"
 		document.body.appendChild(div)
@@ -88,9 +88,9 @@ class QUI {
 	async endRun() { }
 	//开始
 	async startRun(options) {
-		let { callback, debug = false, timeFlag, devFlag,QRoptions } = options
+		let { callback, debug = false, timeFlag, devFlag,QRoptions,loadingSrc } = options
 		//开始函数执行前执行beforeRun
-		this.__loading()
+		this.__loading(loadingSrc)
 		this.__setRem()
 		// 冻结数据
 		await this.beforeRun()

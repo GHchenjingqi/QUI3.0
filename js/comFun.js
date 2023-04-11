@@ -96,21 +96,6 @@ QUI.getPageSize = function () {
  * 动态标题
  */
 QUI.titleChange = function () {
-    let OriginTitile = document.title, titleTime;
-    document.addEventListener("visibilitychange", function () {
-        if (document.hidden) {
-            document.title = QUI.data.titleInPage;
-            clearTimeout(titleTime)
-        } else {
-            document.title = QUI.data.titleOutPage;
-            titleTime = setTimeout(function () {
-                document.title = OriginTitile
-            },
-                1000)
-        }
-    });
-}
-QUI.titleChange = function () {
     const { titleInPage, titleOutPage } = QUI.data;
     let originTitle = document.title, titleTime;
     document.addEventListener("visibilitychange", () => {
@@ -673,7 +658,7 @@ QUI.repStr = function (str, param, sign) {
 
 
 /**
- * 获取n个随机数
+ * 获取长度为n的随机数
  * @param {*} n 
  * @returns 
  */
