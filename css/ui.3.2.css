@@ -1560,7 +1560,7 @@ a {
     flex-direction: column;
 }
 .qui-boom-right.ui-drawer{
-    right: -500px;
+    right: 0px;
 }
 .ui-drawer-header{
     height: .42rem;

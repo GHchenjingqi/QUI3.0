@@ -51,6 +51,7 @@
 			margin-left: 8px;
 		}
 	</style>
+	<script src="js/qui.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body>
@@ -181,23 +182,23 @@
 		</div>
 	</div>
 
-
-
-	<script type="module">
-		import Q from "./js/main.js"
+	<script>
 		// 运行Q入口函数
-		let options = {
-			callback: "init",
-			debug: true,
-			loadingSrc:"./css/icons/loading.gif",
-			QRoptions: {
-				text: window.location.href,
-				id: 'qrcode',
-				color: '#333'
-			}
-		}
-		await Q.startRun(options)
-		Q.titleChange()
+		let Qui = new QUI({
+			data(){
+                return {
+                    titleInPage:"123",
+                    titleOutPage:"345",
+                    QRoptions: {
+						text: window.location.href,
+						id: 'qrcode',
+						color: '#333'
+					}
+                }
+            },
+		})
+		console.log(Qui)
+		Qui.titleChange()
 		//消息提示
 		document.getElementById("sucMsg").onclick = function(){
 			let msg2 = new Messages({type:"success", msg:"成功了！"})
@@ -266,7 +267,7 @@
 				direction:"right",
 			}).show()
 		}
-		
+
 	</script>
 </body>
 

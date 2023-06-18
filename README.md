@@ -7,12 +7,7 @@ QUI.js是一款开源的前端轻量UI插件，能与JQuery,Swiper,Vue,Bootstrap
 ### 公共方法
 
 ### 初始化函数
-startRun(options)  
 options参数：
-- callback: "init", //QUI回调函数，不可修改 
-- devFlag：false, //控制台打印设备宽高信息
-- timeFlag： false,  // 控制台打印当前日期
-- debug: true,  // 控制台日志是否显示
 - loadingSrc:"./css/icons/loading.gif",  //全局加载loading图片路径  
 // 二维码参数
 - QRoptions:  
